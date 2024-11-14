@@ -1,0 +1,45 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-titillium;
+  }
+
+  a {
+    @apply text-theme-green;
+  }
+}
+
+@layer components {
+  .section {
+    padding: 32px;
+  }
+
+  .title {
+    font-weight: bold;
+    font-size: 1.563rem;
+    @apply text-theme-green;
+  }
+
+  .nav {
+    display: flex;
+    gap: 16px;
+  }
+
+  .nav__item {
+    @apply text-theme-link;
+
+    &:hover {
+      @apply text-theme-linkHover;
+      transition: .2s;
+    }
+
+    &.active,
+    &:active {
+      @apply text-theme-linkActive;
+    }
+  }
+}
+
