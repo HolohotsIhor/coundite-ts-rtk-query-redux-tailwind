@@ -1,15 +1,14 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
+import { IProduct } from '../../store/models/product';
 
-interface ArticleProps {
-    title: string
-    description: string
-    image: string
-    price: number
-    rate: number
+interface ProductProps {
+    product: IProduct
 }
-export const Article: FC<ArticleProps> = ({ title, description, image, price, rate }) => {
+export const Product: FC<ProductProps> = ({ product }) => {
+    const { title, description, image, price, rating } = product;
+
     return (
         <article className='pb-6'>
             <div className='flex justify-between items-center border-t border-gray-300 py-6'>
@@ -31,7 +30,7 @@ export const Article: FC<ArticleProps> = ({ title, description, image, price, ra
                 <div tabIndex={0}
                      className='flex items-center gap-0.5 border border-green-400 py-1 px-2 cursor-pointer hover:text-white hover:bg-theme-green focus:text-white focus:bg-theme-green'>
                     <AiOutlineHeart/>
-                    <div>{ rate }</div>
+                    <div>{ rating.rate }</div>
                 </div>
             </div>
             <Link to="/article/qwert" className='font-600 text-2xl text-black'>

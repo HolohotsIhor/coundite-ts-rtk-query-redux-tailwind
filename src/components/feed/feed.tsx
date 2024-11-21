@@ -1,13 +1,13 @@
 import React from 'react';
 import { Container } from '../container/container';
-import { ArticleList } from '../article-list/article-list';
-import { TagList } from '../tag-list/tag-list';
+import { ProductsList } from '../article-list/products-list';
+import { CategoryList } from '../category-list/category-list';
 
 export const Feed = () => {
     return (
         <Container classes='flex items-start justify-between'>
-            <ArticleList />
-            <TagList />
+            <ProductsList />
+            <CategoryList />
         </Container>
     );
 }
