@@ -1,8 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { fakeStoreApi } from './api';
+import { productsReducer } from './slices/products';
 
 export const store = configureStore({
     reducer: {
+        products: productsReducer,
         [fakeStoreApi.reducerPath]: fakeStoreApi.reducer
     },
     middleware: (getDefaultMiddleware) =>

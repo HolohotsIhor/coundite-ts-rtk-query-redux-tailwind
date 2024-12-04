@@ -1,33 +1,41 @@
-import React, { useState } from 'react';
+import React, { useEffect, useLayoutEffect, useState } from 'react';
 import { Product } from '../product/product';
 import { FeedsToggle } from '../global-feeds/feeds-toggle';
-import { useGetProductsQuery } from '../../store/api';
 import { useQueryState } from '../../hooks/useQueryState';
 import ReactPaginate from 'react-paginate';
 import { PAGE_SIZE } from '../../constants/constants';
+import { useAppDispatch, useAppSelector } from '../../hooks/useRedux';
+import { IProduct } from '../../models/product';
+import { useGetProductsQuery } from '../../store/api';
+import { productsSlice } from '../../store/slices/products';
 
 export const ProductsList = () => {
-    const [page, setPage] = useState(0)
-    const { data, error, isLoading } = useGetProductsQuery({ page: page + 1 })
-    const amount = data ? data.length : 0
-    let products = (data ?? []).slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
-    const showPagination = amount > 0;
+    const dispatch = useAppDispatch()
+    const { data} = useGetProductsQuery()
+    const { products, page , error, loading} = useAppSelector( state => state.products )
+    const amount = products ? products.length : 0
+    const showPagination = amount > 0
+    let currentProducts: IProduct[] = (products ?? []).slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
     const queryState = useQueryState({
-        isLoading,
+        isLoading: loading,
         error,
         loadingMessage: 'Products loading...',
         errorMessage: "Error. Products can't load...",
     });
 
-    const handlePageChange = ({ selected }: { selected: number }) => setPage(selected)
+    useEffect(() => {
+       if (data) dispatch(productsSlice.actions.fetchSuccess(data))
+    }, [dispatch, data]);
+
+    const handlePageChange = ({ selected }: { selected: number }) => dispatch(productsSlice.actions.fetchPage(selected))
 
     return (
         <div className='w-[65%] pb-10'>
             <FeedsToggle />
             {queryState || (
-                products
-                    ? products.map( product => (
+                currentProducts
+                    ? currentProducts.map( product => (
                         <Product
                             product={ product }
                             key={ product.id }

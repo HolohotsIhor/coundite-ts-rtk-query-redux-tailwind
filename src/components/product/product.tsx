@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
-import { IProduct } from '../../store/models/product';
+import { IProduct } from '../../models/product';
 
 interface ProductProps {
     product: IProduct

@@ -1,31 +1,35 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { axiosBaseQuery } from '../../axios';
-import { IProduct } from '../models/product';
-import { TCategories } from '../models/categories';
-
-interface IProductPage {
-    page: number
-}
+import { IProduct } from '../../models/product';
+import { TCategories } from '../../models/categories';
 
 export const fakeStoreApi = createApi({
     reducerPath: 'storeApi',
     baseQuery: axiosBaseQuery({ baseUrl:  'https://fakestoreapi.com/' }),
     endpoints: (builder) => ({
-        getProducts: builder.query<IProduct[], IProductPage>({
+        getProducts: builder.query<IProduct[], void>({
             query: () => ({
                 url: 'products',
                 method: 'get'
             })
         }),
-        gatAllCategories: builder.query<TCategories, void>({
+        getAllCategories: builder.query<TCategories, void>({
             query: () => ({
                 url: 'products/categories',
                 method: 'get'
             })
-        })
+        }),
+        getCategory: builder.query<IProduct[], string>({
+            query: (category) => ({
+                url: `products/category/${category}`,
+                method: 'get'
+            })
+        }),
     }),
 })
 
 export const {
+    useLazyGetProductsQuery,
     useGetProductsQuery,
-    useGatAllCategoriesQuery } = fakeStoreApi
+    useGetAllCategoriesQuery,
+    useLazyGetCategoryQuery } = fakeStoreApi

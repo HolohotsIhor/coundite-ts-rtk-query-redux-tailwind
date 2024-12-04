@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from '../container/container';
-import { ProductsList } from '../article-list/products-list';
+import { ProductsList } from '../products-list/products-list';
 import { CategoryList } from '../category-list/category-list';
 
 export const Feed = () => {
