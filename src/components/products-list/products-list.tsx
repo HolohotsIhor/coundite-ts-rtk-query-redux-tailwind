@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Product } from '../product/product';
 import { FeedsToggle } from '../global-feeds/feeds-toggle';
 import { useQueryState } from '../../hooks/useQueryState';
@@ -11,14 +11,14 @@ import { productsSlice } from '../../store/slices/products';
 
 export const ProductsList = () => {
     const dispatch = useAppDispatch()
-    const { data} = useGetProductsQuery()
-    const { products, page , error, loading} = useAppSelector( state => state.products )
+    const { data, error, isLoading} = useGetProductsQuery()
+    const { products, page, loading} = useAppSelector( state => state.products )
     const amount = products ? products.length : 0
     const showPagination = amount > 0
     let currentProducts: IProduct[] = (products ?? []).slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE)
 
     const queryState = useQueryState({
-        isLoading: loading,
+        isLoading,
         error,
         loadingMessage: 'Products loading...',
         errorMessage: "Error. Products can't load...",
@@ -26,6 +26,7 @@ export const ProductsList = () => {
 
     useEffect(() => {
        if (data) dispatch(productsSlice.actions.fetchSuccess(data))
+       else dispatch(productsSlice.actions.fetchError(new Error('No products...')))
     }, [dispatch, data]);
 
     const handlePageChange = ({ selected }: { selected: number }) => dispatch(productsSlice.actions.fetchPage(selected))
@@ -34,14 +35,18 @@ export const ProductsList = () => {
         <div className='w-[65%] pb-10'>
             <FeedsToggle />
             {queryState || (
-                currentProducts
-                    ? currentProducts.map( product => (
-                        <Product
-                            product={ product }
-                            key={ product.id }
-                        />
-                    ))
-                    : <p>No products..</p>
+                !loading
+                    ?
+                        currentProducts
+                            ? currentProducts.map( product => (
+                                <Product
+                                    product={ product }
+                                    key={ product.id }
+                                />
+                            ))
+                            : <p>No products..</p>
+                    :
+                        <p>Updating products list...</p>
                 )
             }
             {
@@ -53,7 +58,7 @@ export const ProductsList = () => {
                     pageRangeDisplayed={amount / PAGE_SIZE}
                     previousLabel={null}
                     nextLabel={null}
-                    containerClassName='flex justify-center'
+                    containerClassName='flex justify-center mt-6'
                     pageClassName='group'
                     pageLinkClassName='px-3 py-2 bg-white border border-gray-300 -ml-px hover:bg-gray-50 hover:underline group-[&:nth-child(2)]:rounded-l group-[&:nth-last-child(2)]:rounded-r'
                     activeClassName='active group'

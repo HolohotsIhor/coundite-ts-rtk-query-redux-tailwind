@@ -21,6 +21,7 @@ export const CategoryList = () => {
     }, [dispatch, categoryData]);
 
     const handleClick = (category: string): void => {
+        dispatch(productsSlice.actions.fetching())
         triggerGetCategory(category)
     }
 

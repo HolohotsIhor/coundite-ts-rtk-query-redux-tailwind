@@ -1,29 +1,39 @@
 import React, { FC } from 'react';
-import { Link } from 'react-router-dom';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { IProduct } from '../../models/product';
+import { useNavigate } from 'react-router-dom';
 
 interface ProductProps {
     product: IProduct
 }
+
 export const Product: FC<ProductProps> = ({ product }) => {
-    const { title, description, image, price, rating } = product;
+    const navigate = useNavigate()
+    const { id, title, description, image, price, rating } = product;
+
+    const handleClick = () => {
+        console.log('click')
+        navigate(`/product/${id}`);
+    }
 
     return (
-        <article className='pb-6'>
-            <div className='flex justify-between items-center border-t border-gray-300 py-6'>
+        <article
+            className='pb-6 hover:bg-gray-100 cursor-pointer'>
+            <div className='flex justify-between items-center border-t border-gray-300 p-6'>
                 <div className='flex items-center font-light'>
-                    <Link to='/@link' className='mr-2'>
+                    <div
+                        onClick={ handleClick }
+                        className='mr-2'>
                         <img
                             src={ image }
                             alt={ title }
                             className='inline-block h-8 w-8 rounded-full'
                         />
-                    </Link>
+                    </div>
                     <div className='mr-6 ml-0.3 inline-block leading-4'>
-                        <Link to='/@link' className='block mb-1 font-medium underline hover:no-underline'>
+                        <div onClick={ handleClick } className='block mb-1 font-medium underline hover:no-underline'>
                             { title }
-                        </Link>
+                        </div>
                         <span className='text-gray-400'>{ price }$</span>
                     </div>
                 </div>
@@ -33,9 +43,9 @@ export const Product: FC<ProductProps> = ({ product }) => {
                     <div>{ rating.rate }</div>
                 </div>
             </div>
-            <Link to="/article/qwert" className='font-600 text-2xl text-black'>
+            <div onClick={ handleClick } className='font-600 text-2xl text-black p-6'>
                 { description }
-            </Link>
+            </div>
         </article>
 );
 }
