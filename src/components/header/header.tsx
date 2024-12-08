@@ -2,10 +2,6 @@ import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { Container } from '../container/container';
 
-interface HeaderProps {
-
-}
-
 export const Header = () => {
     return (
         <header className='px-2 py-4'>

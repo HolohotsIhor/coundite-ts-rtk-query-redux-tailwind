@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { ProductCard } from './components/product-card/product-card';
+import { ProductCard } from './pages/product-card/product-card';
 import { MainPage } from './pages/main/main-page';
 
 interface AppProps {}

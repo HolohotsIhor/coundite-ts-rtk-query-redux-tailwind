@@ -7,6 +7,11 @@ export const fakeStoreApi = createApi({
     reducerPath: 'storeApi',
     baseQuery: axiosBaseQuery({ baseUrl:  'https://fakestoreapi.com/' }),
     endpoints: (builder) => ({
+        getSingleProduct: builder.query<IProduct, number>({
+           query: (id: number) => ({
+               url: `products/${id}`
+           })
+        }),
         getProducts: builder.query<IProduct[], void>({
             query: () => ({
                 url: 'products',
@@ -30,6 +35,7 @@ export const fakeStoreApi = createApi({
 
 export const {
     useLazyGetProductsQuery,
+    useGetSingleProductQuery,
     useGetProductsQuery,
     useGetAllCategoriesQuery,
     useLazyGetCategoryQuery } = fakeStoreApi

@@ -30,9 +30,9 @@ export const productsSlice = createSlice({
         fetchPage(state, action: PayloadAction<number>): void {
             state.page = action.payload
         },
-        fetchError(state, action: PayloadAction<Error>) {
+        fetchError(state, action: PayloadAction<string>) {
             state.loading = false
-            state.error = action.payload.message
+            state.error = action.payload
         }
     }
 })

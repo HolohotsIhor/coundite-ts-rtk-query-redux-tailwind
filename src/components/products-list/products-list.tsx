@@ -26,7 +26,7 @@ export const ProductsList = () => {
 
     useEffect(() => {
        if (data) dispatch(productsSlice.actions.fetchSuccess(data))
-       else dispatch(productsSlice.actions.fetchError(new Error('No products...')))
+       else dispatch(productsSlice.actions.fetchError('No products...'))
     }, [dispatch, data]);
 
     const handlePageChange = ({ selected }: { selected: number }) => dispatch(productsSlice.actions.fetchPage(selected))
