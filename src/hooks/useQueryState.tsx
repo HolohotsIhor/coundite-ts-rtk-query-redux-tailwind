@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from '../components/container/container';
+import { Container } from '../components/Container/Container';
 
 interface UseQueryStateProps {
     isLoading: boolean;

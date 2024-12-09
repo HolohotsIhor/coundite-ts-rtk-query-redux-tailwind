@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
-import { Product } from '../product/product';
-import { FeedsToggle } from '../global-feeds/feeds-toggle';
+import { Product } from '../Product/Product';
+import { GlobalFeeds } from '../GlobalFeeds/GlobalFeeds';
 import { useQueryState } from '../../hooks/useQueryState';
 import ReactPaginate from 'react-paginate';
 import { PAGE_SIZE } from '../../constants/constants';
@@ -33,7 +33,7 @@ export const ProductsList = () => {
 
     return (
         <div className='w-[65%] pb-10'>
-            <FeedsToggle />
+            <GlobalFeeds />
             {queryState || (
                 !loading
                     ?

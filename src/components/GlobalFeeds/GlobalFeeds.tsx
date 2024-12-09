@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-export const FeedsToggle = () => {
+export const GlobalFeeds = () => {
     return (
         <div className='h-[30px]'>
             <ul className='flex'>

@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useGetSingleProductQuery } from '../../store/api';
-import { Container } from '../../components/container/container';
+import { Container } from '../../components/Container/Container';
 import { useQueryState } from '../../hooks/useQueryState';
-import { Header } from '../../components/header/header';
-import { Intro } from '../../components/intro/intro';
+import { Header } from '../../components/Header/Header';
+import { SectionIntro } from '../../components/SectionIntro/SectionIntro';
 
 export const ProductCard= () => {
     const params = useParams<'id'>()
@@ -21,7 +21,7 @@ export const ProductCard= () => {
     return (
         <>
             <Header />
-            <Intro />
+            <SectionIntro />
             <Container
                 classes='pt-10'
             >

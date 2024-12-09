@@ -1,7 +1,7 @@
 import React from 'react';
-import { Container } from '../container/container';
+import { Container } from '../Container/Container';
 
-export const Intro = () => {
+export const SectionIntro = () => {
     return (
         <section className='section bg-theme-green text-white text-center shadow-section mb-6'>
             <Container>
