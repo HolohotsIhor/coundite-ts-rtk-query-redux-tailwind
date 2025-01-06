@@ -1,11 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { fakeStoreApi } from './api';
 import { productsReducer } from './slices/products';
+import { postsReducer } from './slices/posts';
+import { todosReducer } from './slices/todo';
 
 export const store = configureStore({
     reducer: {
         products: productsReducer,
-        [fakeStoreApi.reducerPath]: fakeStoreApi.reducer
+        posts: postsReducer,
+        todos: todosReducer,
+        [fakeStoreApi.reducerPath]: fakeStoreApi.reducer,
     },
     middleware: (getDefaultMiddleware) =>
         getDefaultMiddleware()

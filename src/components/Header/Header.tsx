@@ -12,15 +12,11 @@ export const Header = () => {
                 <Container classes='flex justify-between items-center'>
                     <Link className='title' to='/'>Сonduit</Link>
                     <ul className='nav'>
-                        <li>
-                            <NavLink className='nav__item' to='/'>Home</NavLink>
-                        </li>
-                        <li>
-                            <NavLink className='nav__item' to='/sign-in'>Sign in</NavLink>
-                        </li>
-                        <li>
-                            <NavLink className='nav__item' to='/sign-up'>Sign up</NavLink>
-                        </li>
+                        <li><NavLink className='nav__item' to='/'>Home</NavLink></li>
+                        <li><NavLink className='nav__item' to='/blog'>Blog</NavLink></li>
+                        <li><NavLink className='nav__item' to='/todos'>Todos</NavLink></li>
+                        <li><NavLink className='nav__item' to='/sign-in'>Sign in</NavLink></li>
+                        <li><NavLink className='nav__item' to='/sign-up'>Sign up</NavLink></li>
                     </ul>
                     <button
                         onClick={() => setIsModal(true)}
