@@ -1,5 +1,6 @@
 import { ITodo } from '../../models/todos';
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { fetchTodos } from '../api/todos';
 
 type initialStateType = {
     todos: ITodo[],
@@ -13,22 +14,17 @@ const initialState: initialStateType = {
     error: null,
 }
 
-export const fetchTodos = createAsyncThunk(
-    'todosSlice/fetchTodos',
-    async function() {
-        const response = await fetch('https://jsonplaceholder.typicode.com/todos')
-
-        return response.json()
-    }
-)
-
 export const todosSlice = createSlice({
     name: 'todosSlice',
     initialState,
     reducers: {
-        fetchSuccess(state, action: PayloadAction<ITodo[]>): void {
-            state.loading = false
-            state.todos = action.payload
+        removeTodo(state, action: PayloadAction<number>): void {
+            state.todos = state.todos.filter(todo => todo.id !== action.payload)
+        },
+        updateTodo(state, action: PayloadAction<number>): void {
+            state.todos.forEach(todo => {
+                if (todo.id === action.payload) todo.completed = !todo.completed
+            })
         },
     },
     // Thunk extraReducers logic
@@ -42,12 +38,16 @@ export const todosSlice = createSlice({
                 state.loading = true
                 state.error = null
                 state.todos = action.payload
-            })
-            .addCase(fetchTodos.rejected, (state, action) => {
                 state.loading = false
-                state.error = action.payload as string
+            })
+            .addCase(fetchTodos.rejected, (state) => {
+                state.loading = false
+                state.error = 'Reject'
             });
     }
 })
 
 export const todosReducer = todosSlice.reducer
+export const {
+    updateTodo,
+    removeTodo } = todosSlice.actions

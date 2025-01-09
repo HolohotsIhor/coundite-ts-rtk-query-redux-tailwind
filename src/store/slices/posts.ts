@@ -2,11 +2,15 @@ import { IPost } from '../../models/post';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 type initialStateType = {
-    posts: IPost[]
+    posts: IPost[],
+    loading: boolean,
+    error: string
 }
 
 const initialState: initialStateType = {
-    posts: []
+    posts: [],
+    loading: false,
+    error: ''
 }
 
 export const postsSlice = createSlice({
@@ -14,7 +18,11 @@ export const postsSlice = createSlice({
     initialState,
     reducers: {
         fetchSuccess(state, action: PayloadAction<IPost[]>): void {
+            state.loading = false
             state.posts = action.payload
+        },
+        fetchError(state, action: PayloadAction<string>): void {
+            state.error = action.payload
         },
     }
 })

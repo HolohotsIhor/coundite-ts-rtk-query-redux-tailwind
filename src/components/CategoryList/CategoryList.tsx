@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useGetAllCategoriesQuery, useLazyGetCategoryQuery, useLazyGetProductsQuery } from '../../store/api';
 import { useQueryState } from '../../hooks/useQueryState';
 import { useAppDispatch } from '../../hooks/useRedux';
 import { productsSlice } from '../../store/slices/products';
+import { Modal } from '../Modal/Modal';
 
 export const CategoryList = () => {
+    const [ isModal, setIsModal ]= useState(false)
     const dispatch = useAppDispatch()
     const { data , error, isLoading} = useGetAllCategoriesQuery()
     const [ triggerGetAllProducts] = useLazyGetProductsQuery()
@@ -72,6 +74,18 @@ export const CategoryList = () => {
                     )
                 }
             </ul>
+            <button
+                onClick={() => setIsModal(true)}
+                className='cursor-pointer mt-2 bg-blue-500 text-white py-2 px-4 rounded-3xl hover:bg-blue-600 transition-all'
+            >Add product
+            </button>
+            <Modal
+                isOpen={isModal}
+                onClose={() => setIsModal(false)}
+            >
+                <h2>Add new product</h2>
+                <p>You can add some product to our DB</p>
+            </ Modal>
         </div>
     );
 }

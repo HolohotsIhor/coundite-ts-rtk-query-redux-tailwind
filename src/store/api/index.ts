@@ -33,6 +33,7 @@ export const fakeStoreApi = createApi({
     }),
 })
 
+// Custom hooks
 export const {
     useLazyGetProductsQuery,
     useGetSingleProductQuery,

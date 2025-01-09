@@ -11,10 +11,7 @@ export const Product: FC<ProductProps> = ({ product }) => {
     const navigate = useNavigate()
     const { id, title, description, image, price, rating } = product;
 
-    const handleClick = () => {
-        console.log('click')
-        navigate(`/product/${id}`);
-    }
+    const handleClick = () => navigate(`/product/${id}`)
 
     return (
         <article
