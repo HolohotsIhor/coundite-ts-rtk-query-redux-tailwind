@@ -20,7 +20,7 @@ export const fakeStoreApi = createApi({
         }),
         getAllCategories: builder.query<TCategories, void>({
             query: () => ({
-                url: 'products/categories',
+                url: 's',
                 method: 'get'
             })
         }),
@@ -30,6 +30,19 @@ export const fakeStoreApi = createApi({
                 method: 'get'
             })
         }),
+        addPost: builder.query<IProduct[], void>({
+            query: (product) => ({
+                url: `products/`,
+                method: 'post',
+                body: JSON.stringify({
+                    title: 'test product',
+                    price: 13.5,
+                    description: 'lorem ipsum set',
+                    image: 'https://i.pravatar.cc',
+                    category: 'electronic'
+                })
+            })
+        })
     }),
 })
 
@@ -39,4 +52,6 @@ export const {
     useGetSingleProductQuery,
     useGetProductsQuery,
     useGetAllCategoriesQuery,
-    useLazyGetCategoryQuery } = fakeStoreApi
+    useLazyGetCategoryQuery,
+    useLazyAddPostQuery,
+} = fakeStoreApi

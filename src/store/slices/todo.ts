@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { fetchTodos } from '../api/todos';
 
 type initialStateType = {
-    todos: ITodo[],
+    todos: ITodo[]
     loading: boolean
     error: string | null
 }
@@ -27,6 +27,7 @@ export const todosSlice = createSlice({
             })
         },
     },
+
     // Thunk extraReducers logic
     extraReducers: (builder) => {
         builder
@@ -47,6 +48,7 @@ export const todosSlice = createSlice({
     }
 })
 
+// Export reducer and actions
 export const todosReducer = todosSlice.reducer
 export const {
     updateTodo,

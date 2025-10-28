@@ -4,6 +4,7 @@ import { useQueryState } from '../../hooks/useQueryState';
 import { useAppDispatch } from '../../hooks/useRedux';
 import { productsSlice } from '../../store/slices/products';
 import { Modal } from '../Modal/Modal';
+import { FormNewProduct } from '../FormNewProduct/FormNewProduct';
 
 export const CategoryList = () => {
     const [ isModal, setIsModal ]= useState(false)
@@ -85,6 +86,8 @@ export const CategoryList = () => {
             >
                 <h2>Add new product</h2>
                 <p>You can add some product to our DB</p>
+
+                <FormNewProduct categories={data || []} />
             </ Modal>
         </div>
     );
